@@ -1,0 +1,8 @@
+services:
+  backend:
+    image: mcr.microsoft.com/devcontainers/python:3.12-bullseye
+    build:
+      context: . 
+    volumes:
+      - ..:/workspace:cached
+    command: sleep infinity
