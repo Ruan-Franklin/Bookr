@@ -1,0 +1,9 @@
+{
+  "python.defaultInterpreterPath": "/workspace/Bookr/.venv/bin/python",
+  "python.terminal.activateEnvironment": true,
+  "terminal.integrated.cwd": "/workspace/Bookr",
+  "terminal.integrated.env.linux": {
+    "VIRTUAL_ENV": "/workspace/Bookr/.venv",
+    "PATH": "/workspace/Bookr/.venv/bin:${env:PATH}"
+  }
+}

@@ -4,7 +4,7 @@ LABEL maintainer="Ruan Franklin"
 ENV PYTHONUNBUFFERED=1 
 
 COPY ./requirements.txt /tmp/requirements.txt
-COPY ./back /back
+COPY . /back
 
 WORKDIR /back
 EXPOSE 8000

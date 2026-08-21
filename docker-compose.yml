@@ -1,7 +1,4 @@
-version: '3.8'
-
 services:
-  # Banco de Dados
   db:
     image: postgres:15-alpine
     container_name: bookr_db
@@ -38,4 +35,18 @@ services:
       - db
       - redis
       - mailpit
+  redis:
+    image: redis:7-alpine
+    container_name: bookr_redis
+    ports:
+      - "6379:6379"
+  
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: bookr_mailpit
+    ports:
+      - "1025:1025"
+      
 
+volumes:
+  postgres_data: 
