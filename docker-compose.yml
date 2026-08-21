@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # Banco de Dados
+  db:
+    image: postgres:15-alpine
+    container_name: bookr_db
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    container_name: bookr_backend
+    command: >
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./back:/back
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env 
+    environment:
+      - DB_HOST=db
+      - REDIS_URL=redis://redis:6379/0
+      - EMAIL_HOST=mailpit
+      - EMAIL_PORT=1025
+    depends_on:
+      - db
+      - redis
+      - mailpit
+
