@@ -1,0 +1,42 @@
+{
+  "name": "BooKr Monorepo",
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "docker-compose.yml"
+  ],
+  "service": "backend",
+  "workspaceFolder": "/workspace/Bookr",
+  "remoteEnv": {
+    "VIRTUAL_ENV": "/workspace/Bookr/.venv",
+    "PATH": "/workspace/Bookr/.venv/bin:${containerEnv:PATH}"
+  },
+  "forwardPorts": [8000],
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/workspace/Bookr/.venv/bin/python",
+        "python.terminal.activateEnvironment": true,
+        "terminal.integrated.cwd": "/workspace/Bookr"
+      },
+      "extensions": [
+        "ms-python.python",
+        "batisteo.vscode-django",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "formulahendry.auto-rename-tag",
+        "anthropic.claude-code",
+        "github.copilot-chat",
+        "github.vscode-pull-request-github"
+
+      ]
+    }
+  },
+  "postCreateCommand": "cd /workspace/Bookr && python -m venv .venv && . .venv/bin/activate && python -m pip install --upgrade pip && python -m pip install -r back/requirements.txt",
+  "remoteUser": "vscode"
+}
