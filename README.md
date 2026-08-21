@@ -68,6 +68,10 @@ Bookr is intended to be:
 
 This project is currently in the design and planning phase, with the class diagram serving as the foundation for the system architecture and domain structure.
 
+## Documentation
+
+- [Requirements](docs/requirements.md)
+
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
