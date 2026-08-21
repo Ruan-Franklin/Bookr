@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# Lock or temporary files created by package managers or build tools
+*.asta.lock
