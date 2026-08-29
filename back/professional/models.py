@@ -25,6 +25,11 @@ class Professional(BaseModel):
         related_name="professional_profile",
     )
 
+    class Meta:
+        verbose_name = "Professional"
+        verbose_name_plural = "Professionals"
+        ordering = ["user__full_name"]
+
     def __str__(self):
         return self.user.full_name
 
