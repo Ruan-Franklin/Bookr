@@ -62,3 +62,14 @@ class AppointmentModelTestCase(TestCase):
                 user=self.user,
                 professional=self.professional
             )
+    def test_appointment_str_method(self):
+        """Test the string representation of the Appointment model."""
+        appointment = Appointment.objects.create(
+            user=self.user,
+            professional=self.professional,
+            service=self.service,
+            start_time=timezone.make_aware(datetime(2026, 6, 1, 10, 0)),
+            status="scheduled"
+        )
+        expected_str = f"Appointment {appointment.id} - {appointment.status} - {appointment.start_time}"
+        self.assertEqual(str(appointment), expected_str)
