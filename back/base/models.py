@@ -20,24 +20,23 @@ class BaseModel(models.Model):
         to="user.User", on_delete=models.SET_NULL, null=True, blank=True, related_name="%(class)s_updated_by"
     )
     is_active = models.BooleanField(default=True)
-    deleted_at = models.DateTimeField(null=True, blank=True)
 
 
 
     class Meta:
         abstract = True
 
-    def delete(self, using=None, keep_parents=False):
+    def delete(self, using=None, keep_parents=False, user=None):
         """Soft delete the object by setting is_active to False and deleted_at to the current time."""
         self.is_active = False
         self.deleted_at = timezone.now()
-        self.save()
+        self.save(user=user)
 
-    def restore(self):
+    def restore(self, user=None):
         """Restore the object by setting is_active to True and deleted_at to None."""
         self.is_active = True
         self.deleted_at = None
-        self.save()
+        self.save(user=user)
 
     def save(self, *args, **kwargs):
         """Override the save method to update the updated_at and updated_by fields."""
