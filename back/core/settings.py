@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import drf_spectacular
 import environ
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -47,7 +49,9 @@ INSTALLED_APPS = [
     "professional",
     "service",
     "appointment",
-    "review"
+    "review",
+    "rest_framework",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -82,6 +86,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "core.wsgi.application"
 
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": ["rest_framework_simplejwt.authentication.JWTAuthentication"],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+    "REFRESH_TOKEN_LIFETIME": timedelta(minutes=60 * 60 * 24 * 7), 
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Appointment Booking API",
+    "DESCRIPTION": "API for managing appointments, professionals, services, and reviews.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
