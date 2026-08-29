@@ -93,15 +93,18 @@ if os.environ.get("DB_ENGINE") == "postgresql":
             "HOST": env("DB_HOST"),
             "PORT": env("DB_PORT"),
         }
-}
+    }
 
-else:
+elif os.environ.get("DB_ENGINE") == 'sqlite':
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": BASE_DIR / "db.sqlite3",
         }
     }
+
+else:
+    raise ValueError("Invalid database engine specified. Please set DB_ENGINE to 'postgresql' or 'sqlite'.")
 
 CORS_ALLOWED_ORIGINS = env.list("DJANGO_CORS_ALLOWED_ORIGINS")
 CSRF_TRUSTED_ORIGINS = env.list("DJANGO_CORS_ALLOWED_ORIGINS")
