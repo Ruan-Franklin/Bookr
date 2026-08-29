@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "professional",
     "service",
     "appointment",
+    "review"
 ]
 
 MIDDLEWARE = [
